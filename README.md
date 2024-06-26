@@ -45,7 +45,7 @@
 - POST /habits → Cria um novo hábito;
 - GET /habits → Lista todos os hábitos;
 - DELETE /habits/:id → Excluir um hábito;
-- PATCH /habits/:id/toogle →  Marca/desmarca o hábito como concluído;
+- PATCH /habits/:id/toggle →  Marca/desmarca o hábito como concluído;
 - GET /habits/:id/metrics?date=2024-01-01 → Mostra as estatísticas de um hábito;
 - POST /focus-times → Cria um tempo de foco concluído;
 - GET /focus-times/metrics/month?date=2024-01-01 → Mostra as estatísticas de tempo de foco no mês;
