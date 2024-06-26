@@ -38,7 +38,7 @@
 ### MVC
 - Model -> Responsável por se comunicar com o banco;
 - View -> Mostrar isso para o usuário (React - Frontend);
-- Controller -> Controla a requisição, chama a Model, define as Regras de Negocios
+- Controller -> Controla a requisição, chama a Model, define as Regras de Negocios e faz o retorno para o usuário.
 
 ## Design da API
 
