@@ -1,10 +1,11 @@
 import { Router } from 'express';
 
 import packageJson from '../package.json';
+import { HabitsController } from './controllers/habits.controller';
 
 export const routes = Router();
 
-const habits = [];
+const habitsController = new HabitsController();
 
 routes.get('/', (request, response) => {
 	const { name, description, version } = packageJson;
@@ -15,12 +16,4 @@ routes.get('/', (request, response) => {
 	});
 });
 
-routes.post('/habits', (request, response) => {
-	const { name } = request.body;
-
-	const newHabit = { name };
-
-	habits.push({ name });
-
-	return response.status(201).json(newHabit);
-});
+routes.post('/habits', habitsController.store);
