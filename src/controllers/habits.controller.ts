@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express';
 import { z } from 'zod';
 import { habitModel } from '../models/habit.model';
+import { buildValidationErrorMessage } from '../utils/build-validation-error-message.util';
 
 export class HabitsController {
 	store = async (request: Request, response: Response): Promise<Response> => {
@@ -8,16 +9,11 @@ export class HabitsController {
 			name: z.string(),
 		});
 
-		const { name } = request.body;
-
-		const habit = schema.safeParse({
-			name,
-		});
+		const habit = schema.safeParse(request.body);
 
 		if (!habit.success) {
-			return response.status(400).json({
-				message: 'Error on validation.',
-			});
+			const errors = buildValidationErrorMessage(habit.error.issues);
+			return response.status(400).json({ message: errors });
 		}
 
 		const findHabit = await habitModel.findOne({
@@ -25,7 +21,7 @@ export class HabitsController {
 		});
 
 		if (findHabit) {
-			return response.status(400).json({ message: 'Habit already exists.' });
+			return response.status(422).json({ message: 'Habit already exists.' });
 		}
 
 		const newHabit = await habitModel.create({
